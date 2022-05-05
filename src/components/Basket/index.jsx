@@ -9,12 +9,11 @@ import {
     CardActionArea,
     Button,
 } from"@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import "./style.css";
-import Product from "../Product";
 import Spinner from "../Spinner";
-import Banner from "../Banner";
+import Swal from "sweetalert2";
 
 const Basket = ({
   basketData,
@@ -30,7 +29,14 @@ const Basket = ({
       if (showSpinner) {
         return <Spinner />;
       }
-      return <Banner />;
+      return (
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You have no items in your cart.'
+          }),
+        <Navigate to="/products" replace={true} />
+      );
     };
     if(!basketData.line_items || !basketData.line_items.length)
         return loading();

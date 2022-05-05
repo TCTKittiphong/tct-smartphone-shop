@@ -1,5 +1,5 @@
 .MuiAppBar-colorPrimary.custom-navbar {
-    background-color: #121212;
+    background-color: #ffff;
   }
   
   .MuiAppBar-colorPrimary.custom-navbar > div > div {
@@ -16,15 +16,15 @@
   }
   
   .custom-navbar .custom-title .logo {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
   }
   
   .basket-wrapper .custom-basket {
     font-size: 45px;
-    color: #bb86fc;
+    color: #000;
   }
   
   .basket-wrapper strong {
-    color: #bb86fc;
+    color: #000;
   }

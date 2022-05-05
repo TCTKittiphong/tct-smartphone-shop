@@ -20,14 +20,14 @@ import {
             <Toolbar>
               <Typography
                 component={Link}
-                to="/"
+                to="/products"
                 variant="h6"
                 className="custom-title"
                 color="inherit"
               >
                 <img
-                  src="https://github.com/DwinaTech/public-images/blob/main/DwinaTech-brand.png?raw=true"
-                  alt="DwinaTech logo"
+                  src="https://cdn-icons-png.flaticon.com/512/3714/3714797.png"
+                  alt="logo"
                   height="25px"
                   className="logo"
                 />

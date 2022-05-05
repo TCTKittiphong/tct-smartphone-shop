@@ -6,15 +6,11 @@ import Products from "./components/Products";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Basket from "./components/Basket";
-import { Users } from "./components/Users/Users";
-import {signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
-import auth from "./lib/firebase_config";
-import Banner from "./components/Banner";
+import Swal from "sweetalert2";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [basketData, setBasketData] = useState([]);
-  const [userInfo, setUserInfo] = useState(null);
 
   const fetchProducts = async () => {
     const response = await commerce.products.list();
@@ -34,6 +30,13 @@ const App = () => {
   const addProduct = async (productId, quantity) => {
     const response = await commerce.cart.add(productId, quantity);
     setBasketData(response.cart);
+    Swal.fire({
+      position: 'end',
+      icon: 'success',
+      title: 'Add Product success',
+      showConfirmButton: false,
+      timer: 1000
+    })
   };
   console.log("basketData.total_items", basketData);
 
@@ -45,6 +48,7 @@ const App = () => {
   const handleEmptyBasket = async () => {
     const response = await commerce.cart.empty();
     setBasketData(response.cart);
+    console.log(response.cart);
   };
 
   const updateProduct = async (productId, quantity) => {
@@ -52,43 +56,6 @@ const App = () => {
     setBasketData(response.cart);
   };
 
-  useEffect(() => {
-    auth.onAuthStateChanged( (user) => {
-      if(user){
-        setUserInfo(user);
-      } 
-      else {
-        setUserInfo(null);
-      }
-    });
-  }, []);
-
-  const login = () => {
-    auth.languageCode = 'us';
-    const provaider = new GoogleAuthProvider();
-    signInWithPopup(auth, provaider)
-
-    .then((result) => {
-      console.log("SignIn : ", result);
-    })
-
-    .catch(err => {
-      window.alert(err);
-    });
-  }
-
-  const logout = () => {
-    signOut(auth)
-
-    .then(() => {
-    })
-
-    .catch(err => {
-      window.alert(err);
-    });
-  }
-
-  console.log(userInfo);
 
   return (
     <Router>
@@ -102,9 +69,8 @@ const App = () => {
           }
         />
         <Routes>
-          {/* <Route path="/" element={<Users user={userInfo} login={login} logout={logout}/>} /> */}
           <Route
-            path="/"
+            path="/products"
             element={<Products products={products} addProduct={addProduct} />}
           />
           <Route

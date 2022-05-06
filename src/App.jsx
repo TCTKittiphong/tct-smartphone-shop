@@ -1,20 +1,36 @@
 import { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import React from "react";
 import Products from "./components/Products";
-import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Basket from "./components/Basket";
 import Swal from "sweetalert2";
+import Home from "./components/Users/Home";
 
 const App = () => {
-  const [products, setProducts] = useState([]);
-  const [basketData, setBasketData] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [basketData, setBasketData] = useState([]); 
 
-  const fetchProducts = async () => {
-    const response = await commerce.products.list();
-    setProducts((response && response.data) || []);
+  const fetchProductsPerCategory = async () => {
+    const { data: products } = await commerce.products.list();
+    const { data: categoriesData } = await commerce.categories.list();
+    const productsPerCategory = categoriesData.reduce((acc, category) => {
+      return [
+        ...acc,
+        {
+          ...category,
+          productsData: products.filter((product) =>
+            product.categories.find((cat) => cat.id === category.id)
+          ),
+        },
+      ];
+    }, []);
+    setCategories(productsPerCategory);
   };
 
   const fetchBasketData = async () => {
@@ -23,7 +39,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchProductsPerCategory();
     fetchBasketData();
   }, []);
 
@@ -31,12 +47,12 @@ const App = () => {
     const response = await commerce.cart.add(productId, quantity);
     setBasketData(response.cart);
     Swal.fire({
-      position: 'end',
-      icon: 'success',
-      title: 'Add Product success',
+      position: "end",
+      icon: "success",
+      title: "Add Product success",
       showConfirmButton: false,
-      timer: 1000
-    })
+      timer: 1000,
+    });
   };
   console.log("basketData.total_items", basketData);
 
@@ -56,37 +72,33 @@ const App = () => {
     setBasketData(response.cart);
   };
 
-
   return (
     <Router>
-      <div>
-        <NavBar 
-          basketItems={basketData.total_items}
-          totalCost={
-            (basketData.subtotal &&
-              basketData.subtotal.formatted_with_symbol) ||
-            "00.00"
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route
+          path="/products"
+          element={
+            <Products
+              categories={categories}
+              addProduct={addProduct}
+              basketData={basketData}
+            />
           }
         />
-        <Routes>
-          <Route
-            path="/products"
-            element={<Products products={products} addProduct={addProduct} />}
-          />
-          <Route
-            path="/basket"
-            element={
-              <Basket
-                basketData={basketData}
-                updateProduct={updateProduct}
-                handleEmptyBasket={handleEmptyBasket}
-                RemoveItemFromBasket={RemoveItemFromBasket}
-              />
-            }
-          />
-        </Routes>
-        <Footer />
-      </div>
+        <Route
+          path="/basket"
+          element={
+            <Basket
+              basketData={basketData}
+              updateProduct={updateProduct}
+              handleEmptyBasket={handleEmptyBasket}
+              RemoveItemFromBasket={RemoveItemFromBasket}
+            />
+          }
+        />
+      </Routes>
+      <Footer />
     </Router>
   );
 };

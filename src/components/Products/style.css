@@ -1,0 +1,13 @@
+#products {
+    padding-top: 120px;
+    padding-bottom: 30px;
+  }
+  
+  #products .contents {
+    padding-bottom: 20%;
+  }
+  
+  #products .contents .headline {
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }

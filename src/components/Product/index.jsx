@@ -12,6 +12,7 @@ import "./style.css";
 
 
 const Product = ({ product, addProduct}) => (
+  <div className="w3-container w3-center w3-animate-bottom">
   <Card className="custom-card">
     <CardActionArea>
       <CardMedia
@@ -45,6 +46,7 @@ const Product = ({ product, addProduct}) => (
       </>
     </CardActions>
   </Card>
+  </div>
 );
 
 export default Product;

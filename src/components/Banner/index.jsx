@@ -3,8 +3,9 @@ import "./style.css";
 
 const Banner = () => {
   return (
-    <div className="banner">
-      <Container>
+    <div className="w3-container w3-center w3-animate-bottom">
+    <div className="BG">
+      <Container >
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
             <Typography className="title" variant="h1">
@@ -21,6 +22,7 @@ const Banner = () => {
           </Grid>
         </Grid>
       </Container>
+    </div>
     </div>
   );
 };

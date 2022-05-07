@@ -36,10 +36,24 @@ const Basket = ({
         title: "Oops...",
         text: "You have no items in your cart.",
       }),
-      (<Navigate to="/products" replace={true} />)
+      (<Navigate to="/" replace={true} />)
     );
   };
   if (!basketData.line_items || !basketData.line_items.length) return loading();
+
+  function EmptyBasket () {
+    Swal.fire({
+    title: 'Are you sure?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'OK'
+  }).then((result) => {
+    if (result.isConfirmed){
+      handleEmptyBasket();}
+  })}
+
   return (
     <div>
       <NavBar
@@ -49,6 +63,7 @@ const Basket = ({
           "00.00"
         }
       />
+      <div className="w3-container w3-center w3-animate-bottom">
       <Container id="basket">
         <Grid container justify="center" spacing={4}>
           {basketData.line_items.map((product) => {
@@ -132,7 +147,7 @@ const Basket = ({
             size="small"
             color="secondary"
             variant="contained"
-            onClick={handleEmptyBasket}
+            onClick={EmptyBasket}
           >
             Empty Basket
           </Button>
@@ -147,6 +162,7 @@ const Basket = ({
           </Button>
         </div>
       </Container>
+      </div>
     </div>
   );
 };

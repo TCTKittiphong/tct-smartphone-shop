@@ -91,7 +91,7 @@
     color: #000000;
     background-color: #03dac5;
   }
-  
+
   @media (min-width: 800px) {
     .banner .title {
       font-size: 65px;

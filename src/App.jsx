@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import Products from "./components/Products";
 import Footer from "./components/Footer";
 import Basket from "./components/Basket";
 import Swal from "sweetalert2";
-import Home from "./components/Users/Home";
+import { AuthProvider } from "./components/Users/authContext";
+import { Register } from "./components/Users/Register";
+import { Login } from "./components/Users/Login";
+import { ProtectedRoute } from "./components/Users/ProtectedRoute";
 
 const App = () => {
   const [categories, setCategories] = useState([]);
-  const [basketData, setBasketData] = useState([]); 
+  const [basketData, setBasketData] = useState([]);
 
   const fetchProductsPerCategory = async () => {
     const { data: products } = await commerce.products.list();
@@ -59,6 +58,13 @@ const App = () => {
   const RemoveItemFromBasket = async (itemId) => {
     const response = await commerce.cart.remove(itemId);
     setBasketData(response.cart);
+    Swal.fire({
+      position: "end",
+      icon: "success",
+      title: "Remove Product success",
+      showConfirmButton: false,
+      timer: 1000,
+    });
   };
 
   const handleEmptyBasket = async () => {
@@ -73,33 +79,42 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route
-          path="/products"
-          element={
-            <Products
-              categories={categories}
-              addProduct={addProduct}
-              basketData={basketData}
+    <div className="container">
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Products
+                    categories={categories}
+                    addProduct={addProduct}
+                    basketData={basketData}
+                  />
+                </ProtectedRoute>
+              }
             />
-          }
-        />
-        <Route
-          path="/basket"
-          element={
-            <Basket
-              basketData={basketData}
-              updateProduct={updateProduct}
-              handleEmptyBasket={handleEmptyBasket}
-              RemoveItemFromBasket={RemoveItemFromBasket}
+            <Route
+              path="/basket"
+              element={
+                <ProtectedRoute>
+                  <Basket
+                    basketData={basketData}
+                    updateProduct={updateProduct}
+                    handleEmptyBasket={handleEmptyBasket}
+                    RemoveItemFromBasket={RemoveItemFromBasket}
+                  />
+                </ProtectedRoute>
+              }
             />
-          }
-        />
-      </Routes>
-      <Footer />
-    </Router>
+          </Routes>
+          <Footer />
+        </Router>
+      </AuthProvider>
+    </div>
   );
 };
 

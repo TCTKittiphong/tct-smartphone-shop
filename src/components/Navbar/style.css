@@ -29,10 +29,14 @@
     color: #000;
   }
 
-  h1{
-    margin-top: 2.5%;
-    font-size:24px;
-    margin-left: 5%;
+  .logo{
+    margin-top: 2%;
+  }
+
+  .textname{
+    color: #000;
+    font-size: 24px;
+    margin-left: 2%;
   }
 
   .cart{
@@ -48,14 +52,15 @@
   }
 
   .total{
-    margin-left: 60%;
+    display: flex;
+    margin-left: 50%;
     font-size: 24px;
     color: #000;
   }
 
   @media screen and (max-width: 800px) {
-    h1 {
-      margin-top: 15px;
+    .textname {
+      color: #000;
       font-size: 15px;
     }
   }
@@ -68,6 +73,8 @@
 
   @media screen and (max-width: 800px) {
     .total {
+      display: flex;
+      font-size: 15px;
       margin-left:auto;
     }
   }

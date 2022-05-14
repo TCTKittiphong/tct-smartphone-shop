@@ -1,6 +1,5 @@
 import { Container, Typography, Button, Grid } from "@material-ui/core";
 import "./style.css";
-import AnimatedText from "react-animated-text-content";
 
 const Banner = () => {
   return (

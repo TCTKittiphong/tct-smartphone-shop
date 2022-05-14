@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import React from "react";
 import Products from "./components/Products";
 import Footer from "./components/Footer";
@@ -10,10 +10,14 @@ import { AuthProvider } from "./components/Users/authContext";
 import { Register } from "./components/Users/Register";
 import { Login } from "./components/Users/Login";
 import { ProtectedRoute } from "./components/Users/ProtectedRoute";
+import ProductView from "./components/ProductView";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const [categories, setCategories] = useState([]);
   const [basketData, setBasketData] = useState([]);
+
+  const navigate = useNavigate();
 
   const fetchProductsPerCategory = async () => {
     const { data: products } = await commerce.products.list();
@@ -78,41 +82,53 @@ const App = () => {
     setBasketData(response.cart);
   };
 
+  const productView = (product) => {
+    return navigate(`/product-view/${product}`);
+  };
+
   return (
     <div className="container">
       <AuthProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Products
-                    categories={categories}
-                    addProduct={addProduct}
-                    basketData={basketData}
-                  />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/basket"
-              element={
-                <ProtectedRoute>
-                  <Basket
-                    basketData={basketData}
-                    updateProduct={updateProduct}
-                    handleEmptyBasket={handleEmptyBasket}
-                    RemoveItemFromBasket={RemoveItemFromBasket}
-                  />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-          <Footer />
-        </Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Products
+                  categories={categories}
+                  addProduct={addProduct}
+                  basketData={basketData}
+                  productView={productView}
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/basket"
+            element={
+              <ProtectedRoute>
+                <Basket
+                  basketData={basketData}
+                  updateProduct={updateProduct}
+                  handleEmptyBasket={handleEmptyBasket}
+                  RemoveItemFromBasket={RemoveItemFromBasket}
+                  productView={productView}
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/product-view/:id"
+            element={
+              <ProtectedRoute>
+                <ProductView basketData={basketData} addProduct={addProduct} />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        <Footer />
       </AuthProvider>
     </div>
   );

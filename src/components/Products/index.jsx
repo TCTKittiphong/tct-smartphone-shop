@@ -4,8 +4,9 @@ import Banner from "../Banner";
 import NavBar from "../Navbar";
 import Spinner from "../Spinner";
 
-const Products = ({ categories, addProduct, basketData }) => {
+const Products = ({ categories, addProduct, basketData, productView }) => {
   if (!categories.length) return <Spinner />;
+
   return (
     <div>
       <NavBar
@@ -27,7 +28,7 @@ const Products = ({ categories, addProduct, basketData }) => {
                   {category.productsData.map((product) => {
                     return (
                       <Grid key={product.id} item xs={12} sm={6} md={4}>
-                        <Product product={product} addProduct={addProduct} />
+                        <Product product={product} addProduct={addProduct} productView={productView}/>
                       </Grid>
                     );
                   })}

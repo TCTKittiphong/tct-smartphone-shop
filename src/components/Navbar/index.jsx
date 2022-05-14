@@ -59,10 +59,10 @@ const NavBar = ({ basketItems, totalCost }) => {
                 height="25px"
                 className="logo"
               />
-              <h1 style={{ color: "black" }}>
-                {user.displayName || user.email}
-              </h1>
             </Typography>
+            <div className="textname">
+                {user.displayName || user.email}
+            </div>
             {location.pathname === "/basket" ? (
               <div className="total">
                   Total cost: <strong>{totalCost}</strong>

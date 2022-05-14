@@ -10,42 +10,56 @@ import {
 import { ShoppingCart } from "@material-ui/icons";
 import "./style.css";
 
-
-const Product = ({ product, addProduct}) => (
+const Product = ({ product, addProduct, productView }) => (
   <div className="w3-container w3-center w3-animate-bottom">
-  <Card className="custom-card">
-    <CardActionArea>
-      <CardMedia
-        component="img"
-        className="card-image"
-        height="50%"
-        image={product.image.url}
-        alt="green iguana"
-        title="Contemplative Reptile"
-      />
-      <CardContent className="content">
-        <Typography className="title" gutterBottom variant="h5" component="h2">
-          {product.name}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-    <CardActions className="actions-content">
-      <>
-        <Typography className="price" gutterBottom variant="h5" component="h2">
-          {product.price.formatted_with_symbol}
-        </Typography>
-        <Button 
-            size="large" 
+    <Card className="custom-card">
+      <CardActionArea
+        onClick={() => {
+          productView(product.id);
+        }}
+      >
+        <CardMedia
+          component="img"
+          className="card-image"
+          height="50%"
+          image={product.image.url}
+          alt="green iguana"
+          title="Contemplative Reptile"
+        />
+        <CardContent className="content">
+          <Typography
+            className="title"
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
+            {product.name}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions className="actions-content">
+        <>
+          <Typography
+            className="price"
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
+            {product.price.formatted_with_symbol}
+          </Typography>
+          <Button
+            size="large"
             className="custom-button"
             onClick={() => {
               addProduct(product.id, 1);
             }}
-            >
-          <ShoppingCart /> Add to basket
-        </Button>
-      </>
-    </CardActions>
-  </Card>
+          >
+            <ShoppingCart /> Add to basket
+          </Button>
+        </>
+      </CardActions>
+    </Card>
+    <br />
   </div>
 );
 

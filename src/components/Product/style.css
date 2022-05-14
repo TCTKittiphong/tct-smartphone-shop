@@ -4,10 +4,11 @@
 
   }
   
-  .MuiCard-root.custom-card:hover {
-    
+  .MuiCard-root.custom-card a{
+    color: #666666;
+    text-decoration: none;
   }
-  
+
   .custom-card .content {
     padding-bottom: 0;
   }

@@ -12,7 +12,6 @@ const ProductView = ({ basketData, addProduct }) => {
   const fetchProduct = async (id) => {
     const response = await commerce.products.retrieve(id);
     const { name, price, image, quantity, description } = response;
-    console.log("aa",response);
     setProduct({
       id,
       name,

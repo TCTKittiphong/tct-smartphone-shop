@@ -1,0 +1,14 @@
+h2 {
+  margin-top: 15%;
+}
+
+img{
+  width: 50%;
+  height: 50%;
+}
+
+@media screen and (max-width: 800px) {
+  h2 {
+    margin-top: 20%;
+  }
+}

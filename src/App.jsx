@@ -12,6 +12,7 @@ import { Login } from "./components/Users/Login";
 import { ProtectedRoute } from "./components/Users/ProtectedRoute";
 import ProductView from "./components/ProductView";
 import { useNavigate } from "react-router-dom";
+import CheckOut from "./components/Checkout";
 
 const App = () => {
   const [categories, setCategories] = useState([]);
@@ -124,6 +125,22 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <ProductView basketData={basketData} addProduct={addProduct} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <CheckOut
+                  basketData={basketData}
+                  totalCost={
+                    (basketData.subtotal &&
+                      basketData.subtotal.formatted_with_symbol) ||
+                    "00.00"
+                  }
+                  handleEmptyBasket={handleEmptyBasket}
+                />
               </ProtectedRoute>
             }
           />

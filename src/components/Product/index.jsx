@@ -1,7 +1,5 @@
 import {
   Card,
-  CardMedia,
-  CardContent,
   CardActions,
   Typography,
   CardActionArea,
@@ -18,24 +16,19 @@ const Product = ({ product, addProduct, productView }) => (
           productView(product.id);
         }}
       >
-        <CardMedia
-          component="img"
-          className="card-image"
-          height="50%"
-          image={product.image.url}
-          alt="green iguana"
-          title="Contemplative Reptile"
-        />
-        <CardContent className="content">
-          <Typography
-            className="title"
-            gutterBottom
-            variant="h5"
-            component="h2"
-          >
-            {product.name}
-          </Typography>
-        </CardContent>
+        <figure class="snip">
+          <img
+            src={product.image.url}
+            alt={product.name}
+          />
+          <figcaption>
+            <h2>
+              {product.name}
+            </h2>
+            <p>View</p>
+          </figcaption>
+        </figure>
+        <div className="name">{product.name}</div> 
       </CardActionArea>
       <CardActions className="actions-content">
         <>

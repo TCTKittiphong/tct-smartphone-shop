@@ -47,7 +47,7 @@
   letter-spacing: 5px;
   font-size: 4rem;
   overflow: hidden;
-  margin-left: 10%;
+  margin-left: 18%;
   margin-bottom: 0;
   animation: type 5s steps(11) infinite;
 }
@@ -69,7 +69,7 @@
 @media screen and (max-width: 800px) {
   .typing h2 {
     font-size: 3rem;
-    margin-left: -17.5%;
+    margin-left: -10%;
   }
 }
 

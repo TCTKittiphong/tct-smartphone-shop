@@ -29,7 +29,7 @@ export function Register() {
   };
 
   return (
-    <div className="w-full max-w-xs m-auto">
+    <div className="w-full max-w-xs m-auto py-20">
       {error && <Alert message={error} />}
       <form
         onSubmit={handleSubmit}

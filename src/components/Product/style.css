@@ -1,69 +1,164 @@
 .MuiCard-root.custom-card {
-    background-color: #F2F7FF;
-    color: #666666;
+  background-color: #F2F7FF;
+  color: #666666;
 
-  }
-  
-  .MuiCard-root.custom-card a{
-    color: #666666;
-    text-decoration: none;
-  }
+}
 
-  .custom-card .content {
-    padding-bottom: 0;
-  }
-  
-  .custom-card .title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .custom-card .card-image {
-    padding: 10px 10px 0 10px;
-  }
-  
-  .custom-card p {
-    color: #666666;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .custom-card .price {
-    margin-top: 10px;
-    color: #666666;
-  }
-  
-  .custom-card .basket-item-price {
-    color: #666666;
-    margin-bottom: 0;
-  }
-  
-  .actions-content {
-    display: flex;
-  }
-  
-  .actions-content h2 {
-    flex-grow: 1;
-  }
-  
-  .custom-card .custom-button {
-    color: #478DFF;
-  }
-  
-  .custom-card .custom-button:hover {
-    background-color: #478DFF;
-    color: white;
-    transform: scale(1.05);
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .custom-card .custom-button svg {
-    margin-right: 10px;
-  }
-  
-  .custom-card .increase-product-quantity {
-    color: #666666;
-    border-color: #478DFF;
-  }
+.MuiCard-root.custom-card a {
+  color: #666666;
+  text-decoration: none;
+}
+
+
+.custom-card .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-card .card-image {
+  padding: 10px 10px 0 10px;
+}
+
+.custom-card p {
+  color: #666666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.name{
+  font-size: 24px;
+}
+
+.custom-card .price {
+  margin-top: 10px;
+  color: #666666;
+}
+
+.custom-card .basket-item-price {
+  color: #666666;
+  margin-bottom: 0;
+}
+
+.actions-content {
+  display: flex;
+}
+
+.actions-content h2 {
+  flex-grow: 1;
+}
+
+.custom-card .custom-button {
+  color: #478DFF;
+}
+
+.custom-card .custom-button:hover {
+  background-color: #478DFF;
+  color: white;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-card .custom-button svg {
+  margin-right: 10px;
+}
+
+figure.snip {
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+figure.snip img {
+  max-width: 100%;
+  opacity: 1;
+  width: 100%;
+  -webkit-transition: opacity 0.35s;
+  transition: opacity 0.35s;
+}
+
+figure.snip figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 30px 3em;
+  width: 100%;
+  height: 100%;
+}
+
+figure.snip figcaption::before {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  bottom: 30px;
+  left: 100%;
+  border-left: 4px solid #666666;
+  content: '';
+  opacity: 0;
+  background-color: #000000;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transition-delay: 0.6s;
+  transition-delay: 0.6s;
+}
+
+figure.snip h2,
+figure.snip p {
+  color: #000000;
+  font-weight: bold; 
+  font-size: 25px;
+  margin: 0 0 5px;
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, -webkit-transform 0.35s, -moz-transform 0.35s, -o-transform 0.35s, transform 0.35s;
+}
+
+figure.snip h2 {
+  word-spacing: -0.15em;
+  text-transform: uppercase;
+  -webkit-transform: translate3d(30%, 0%, 0);
+  transform: translate3d(30%, 0%, 0);
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+
+figure.snip p {
+  font-weight: 200;
+  -webkit-transform: translate3d(0%, 30%, 0);
+  transform: translate3d(0%, 30%, 0);
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+
+figure.snip:hover img {
+  opacity: 0.3;
+}
+
+figure.snip:hover figcaption h2 {
+  opacity: 1;
+  -webkit-transform: translate3d(0%, 0%, 0);
+  transform: translate3d(0%, 0%, 0);
+  -webkit-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+}
+
+figure.snip:hover figcaption p {
+  opacity: 0.9;
+  -webkit-transform: translate3d(0%, 0%, 0);
+  transform: translate3d(0%, 0%, 0);
+  -webkit-transition-delay: 0.6s;
+  transition-delay: 0.6s;
+}
+
+figure.snip:hover figcaption::before {
+  background: rgba(255, 255, 255, 0);
+  left: 30px;
+  opacity: 1;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}

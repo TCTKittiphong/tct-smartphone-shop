@@ -88,7 +88,7 @@ const App = () => {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -145,7 +145,6 @@ const App = () => {
             }
           />
         </Routes>
-        <Footer />
       </AuthProvider>
     </div>
   );

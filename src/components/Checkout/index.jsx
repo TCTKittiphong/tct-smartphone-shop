@@ -6,8 +6,9 @@ import { v4 } from "uuid";
 import Swal from "sweetalert2";
 import NavBar from "../Navbar";
 import "./style.css";
+import Footer from "../Footer";
 
-export const CheckOut = ({ basketData, totalCost, handleEmptyBasket}) => {
+export const CheckOut = ({ basketData, totalCost, handleEmptyBasket }) => {
   const checkoutRef = collection(db, "/CheckOut");
   const [checkoutName, setCheckoutName] = useState("");
   const [checkoutAD, setCheckoutAD] = useState("");
@@ -98,65 +99,64 @@ export const CheckOut = ({ basketData, totalCost, handleEmptyBasket}) => {
 
   return (
     <div className="w3-animate-bottom">
-      <NavBar
-        basketItems={basketData.total_items}
-      />
+      <NavBar basketItems={basketData.total_items} />
       <div className="container">
-        <h2>CheckOut</h2>
-        <hr />
-        <label>Name</label>
-        <input
-          type="text"
-          className="form-control"
-          required
-          onChange={(e) => setCheckoutName(e.target.value)}
-          value={checkoutName}
-        />
-        <br />
+        <div className="top">
+          <label>Name</label>
+          <input
+            type="text"
+            className="form-control"
+            required
+            onChange={(e) => setCheckoutName(e.target.value)}
+            value={checkoutName}
+          />
+          <br />
 
-        <label>Address</label>
-        <input
-          type="text"
-          className="form-control"
-          required
-          onChange={(e) => setCheckoutAD(e.target.value)}
-          value={checkoutAD}
-        />
-        <br />
+          <label>Address</label>
+          <input
+            type="text"
+            className="form-control"
+            required
+            onChange={(e) => setCheckoutAD(e.target.value)}
+            value={checkoutAD}
+          />
+          <br />
 
-        <label>SubTotal</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder={totalCost}
-          value={checkoutTotal}
-          disabled
-        />
-        <br />
+          <label>SubTotal</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder={totalCost}
+            value={checkoutTotal}
+            disabled
+          />
+          <br />
 
-        <label>Transfer slip</label>
-        <input
-          type="file"
-          className="form-control"
-          id="fileInput"
-          required
-          onChange={(e) => setFile2Upload(e.target.files[0])}
-        />
-        <br />
-        <button className="btn btn btn-primary" onClick={handle}>
-          Upload slip
-        </button>
-        <div>Progress: {progress}%</div>
-        <img src={checkoutIMG} alt="SlipIMG" />
-        <br />
-        <br />
-        <button
-          className="btn btn-success btn-md mybtn"
-          onClick={handleaddCheckout}
-        >
-          Check Out
-        </button>
+          <label>Transfer slip</label>
+          <input
+            type="file"
+            className="form-control"
+            id="fileInput"
+            required
+            onChange={(e) => setFile2Upload(e.target.files[0])}
+          />
+          <br />
+          <button className="btn btn btn-primary" onClick={handle}>
+            Upload slip
+          </button>
+          <div>Progress: {progress}%</div>
+          <img src={checkoutIMG} alt="SlipIMG" />
+          <br />
+          <br />
+          <button
+            className="btn btn-success btn-md mybtn"
+            onClick={handleaddCheckout}
+          >
+            Check Out
+          </button>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

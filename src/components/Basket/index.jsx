@@ -1,7 +1,6 @@
 import {
   Grid,
   Card,
-  CardMedia,
   CardContent,
   CardActions,
   Typography,
@@ -15,6 +14,7 @@ import "./style.css";
 import Spinner from "../Spinner";
 import Swal from "sweetalert2";
 import NavBar from "../Navbar";
+import Footer from "../Footer";
 
 const Basket = ({
   basketData,
@@ -79,13 +79,13 @@ const Basket = ({
                         productView(product.product_id);
                       }}
                     >
-                      <CardMedia
-                        component="img"
-                        alt="IMG Product"
-                        height="50%"
-                        className="card-image"
-                        image={product.image.url}
-                      />
+                      <figure class="snip">
+                        <img src={product.image.url} alt={product.name} />
+                        <figcaption>
+                          <h2>{product.name}</h2>
+                          <p>View</p>
+                        </figcaption>
+                      </figure>
                       <CardContent className="content">
                         <Typography
                           className="title"
@@ -170,6 +170,7 @@ const Basket = ({
           </div>
         </Container>
       </div>
+      <Footer />
     </div>
   );
 };

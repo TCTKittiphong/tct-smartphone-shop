@@ -1,5 +1,5 @@
-h2 {
-  margin-top: 15%;
+.top {
+  margin-top: 10%;
 }
 
 img{
@@ -8,7 +8,7 @@ img{
 }
 
 @media screen and (max-width: 800px) {
-  h2 {
+  .top {
     margin-top: 20%;
   }
 }
